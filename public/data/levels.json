@@ -1,0 +1,14 @@
+[
+  {"id":1,"title":"Životinje i priroda","icon":"🦊","difficulty":"Lako","category":"Priroda","points":300,"status":"Završeno","description":"Otvorite polja i pronađite vezu.","columns":[{"name":"Kolona A","words":["Lav","Tigar","Leopard","Jaguar"],"solution":"Mačke"},{"name":"Kolona B","words":["Hrast","Jela","Bor","Breza"],"solution":"Drveće"},{"name":"Kolona C","words":["Sava","Dunav","Tisa","Morava"],"solution":"Reke"},{"name":"Kolona D","words":["Ruža","Lala","Iris","Ljiljan"],"solution":"Cveće"}],"finalSolution":"Priroda"},
+  {"id":2,"title":"Sport i kultura","icon":"⚽","difficulty":"Lako","category":"Sport","points":350,"status":"Završeno","description":"Svetski poznate sportske asocijacije.","columns":[],"finalSolution":"Takmičenje"},
+  {"id":3,"title":"Filmovi i serije","icon":"🎬","difficulty":"Srednje","category":"Kultura","points":500,"status":"Završeno","description":"Klasici svetske kinematografije.","columns":[],"finalSolution":"Film"},
+  {"id":4,"title":"Geografija","icon":"🗺️","difficulty":"Srednje","category":"Geografija","points":550,"status":"Dostupno","description":"Gradovi, reke, planine i more.","columns":[],"finalSolution":"Svet"},
+  {"id":5,"title":"Muzika sveta","icon":"🎵","difficulty":"Srednje","category":"Muzika","points":600,"status":"Dostupno","description":"Žanrovi, bendovi i instrumenti.","columns":[],"finalSolution":"Muzika"},
+  {"id":6,"title":"Nauka i otkrića","icon":"🔬","difficulty":"Teško","category":"Nauka","points":900,"status":"Dostupno","description":"Naučnici, elementi, zakoni prirode.","columns":[],"finalSolution":"Otkriće"},
+  {"id":7,"title":"Hemija i nauka","icon":"⚗️","difficulty":"Teško","category":"Nauka","points":950,"status":"Zaključano","description":"Periodni sistem i reakcije.","columns":[],"finalSolution":"Hemija"},
+  {"id":8,"title":"Istorija sveta","icon":"📜","difficulty":"Teško","category":"Istorija","points":1000,"status":"Zaključano","description":"Carevi, ratovi i revolucije.","columns":[],"finalSolution":"Istorija"},
+  {"id":9,"title":"Hrana i kuhinja","icon":"🍕","difficulty":"Lako","category":"Hrana","points":280,"status":"Završeno","description":"Jela, sastojci i kuhinje sveta.","columns":[],"finalSolution":"Kuhinja"},
+  {"id":10,"title":"Tehnologija","icon":"💻","difficulty":"Srednje","category":"Tehnologija","points":480,"status":"Dostupno","description":"Programiranje, uređaji, inovacija.","columns":[],"finalSolution":"Digitalno"},
+  {"id":11,"title":"Književnost","icon":"📚","difficulty":"Teško","category":"Kultura","points":880,"status":"Zaključano","description":"Pisci, dela i književni pravci.","columns":[],"finalSolution":"Knjige"},
+  {"id":12,"title":"Moda i stil","icon":"👗","difficulty":"Lako","category":"Moda","points":320,"status":"Dostupno","description":"Brendovi, dizajneri, trendovi.","columns":[],"finalSolution":"Stil"}
+]
