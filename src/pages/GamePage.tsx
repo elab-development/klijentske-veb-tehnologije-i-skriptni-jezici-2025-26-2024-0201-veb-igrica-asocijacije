@@ -115,6 +115,11 @@ export default function GamePage() {
               .padStart(2, '0')}
             :{(time % 60).toString().padStart(2, '0')}
           </b>
+          <b>
+            Polja
+            <br />
+            {opened.length}/16
+          </b>
 
           <b>
             Pokušaji
