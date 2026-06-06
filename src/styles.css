@@ -897,3 +897,10 @@ th {
     font-size: 34px;
   }
 }
+.level-card:hover,
+.feature:hover,
+.stat-card:hover {
+  transform: translateY(-4px);
+  transition: 0.2s ease;
+  box-shadow: 0 15px 40px rgba(124, 92, 255, 0.25);
+}
