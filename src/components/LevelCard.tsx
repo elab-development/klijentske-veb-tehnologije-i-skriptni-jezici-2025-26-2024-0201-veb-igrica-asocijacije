@@ -4,6 +4,7 @@ import { ILevel } from '../models/Level';
 export default function LevelCard({ level }: { level: ILevel }) {
   const navigate = useNavigate();
   const locked = level.status === 'Zaključano';
+  const completed = level.status === 'Završeno';
   return (
     <article className={`level-card ${locked ? 'locked' : ''}`}>
       <div className="level-top">
@@ -12,12 +13,8 @@ export default function LevelCard({ level }: { level: ILevel }) {
           <span className={`tag ${level.difficulty.toLowerCase()}`}>
             {level.difficulty}
           </span>
-          <span className={`tag status`}>
-            {locked
-              ? '🔒 Zaključano'
-              : level.status === 'Završeno'
-                ? '✅ Završeno'
-                : '🟢 Dostupno'}
+          <span className="tag status">
+            {locked ? '🔒 Zaključano' : completed ? '✅ Završeno' : '🟢 Dostupno'}
           </span>
         </div>
       </div>
@@ -28,7 +25,7 @@ export default function LevelCard({ level }: { level: ILevel }) {
         <strong>{level.points}</strong>
         <span>poena</span>
         <Button disabled={locked} onClick={() => navigate(`/game/${level.id}`)}>
-          {locked ? '🔒 Zaključano' : 'Igraj →'}
+          {locked ? '🔒 Zaključano' : completed ? 'Igraj ponovo →' : 'Igraj →'}
         </Button>
       </div>
     </article>
