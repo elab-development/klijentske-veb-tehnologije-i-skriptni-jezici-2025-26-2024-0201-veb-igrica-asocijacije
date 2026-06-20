@@ -1,14 +1,398 @@
 [
-  {"id":1,"title":"Životinje i priroda","icon":"🦊","difficulty":"Lako","category":"Priroda","points":300,"status":"Završeno","description":"Otvorite polja i pronađite vezu.","columns":[{"name":"Kolona A","words":["Lav","Tigar","Leopard","Jaguar"],"solution":"Mačke"},{"name":"Kolona B","words":["Hrast","Jela","Bor","Breza"],"solution":"Drveće"},{"name":"Kolona C","words":["Sava","Dunav","Tisa","Morava"],"solution":"Reke"},{"name":"Kolona D","words":["Ruža","Lala","Iris","Ljiljan"],"solution":"Cveće"}],"finalSolution":"Priroda"},
-  {"id":2,"title":"Sport i kultura","icon":"⚽","difficulty":"Lako","category":"Sport","points":350,"status":"Završeno","description":"Svetski poznate sportske asocijacije.","columns":[],"finalSolution":"Takmičenje"},
-  {"id":3,"title":"Filmovi i serije","icon":"🎬","difficulty":"Srednje","category":"Kultura","points":500,"status":"Završeno","description":"Klasici svetske kinematografije.","columns":[],"finalSolution":"Film"},
-  {"id":4,"title":"Geografija","icon":"🗺️","difficulty":"Srednje","category":"Geografija","points":550,"status":"Dostupno","description":"Gradovi, reke, planine i more.","columns":[],"finalSolution":"Svet"},
-  {"id":5,"title":"Muzika sveta","icon":"🎵","difficulty":"Srednje","category":"Muzika","points":600,"status":"Dostupno","description":"Žanrovi, bendovi i instrumenti.","columns":[],"finalSolution":"Muzika"},
-  {"id":6,"title":"Nauka i otkrića","icon":"🔬","difficulty":"Teško","category":"Nauka","points":900,"status":"Dostupno","description":"Naučnici, elementi, zakoni prirode.","columns":[],"finalSolution":"Otkriće"},
-  {"id":7,"title":"Hemija i nauka","icon":"⚗️","difficulty":"Teško","category":"Nauka","points":950,"status":"Zaključano","description":"Periodni sistem i reakcije.","columns":[],"finalSolution":"Hemija"},
-  {"id":8,"title":"Istorija sveta","icon":"📜","difficulty":"Teško","category":"Istorija","points":1000,"status":"Zaključano","description":"Carevi, ratovi i revolucije.","columns":[],"finalSolution":"Istorija"},
-  {"id":9,"title":"Hrana i kuhinja","icon":"🍕","difficulty":"Lako","category":"Hrana","points":280,"status":"Završeno","description":"Jela, sastojci i kuhinje sveta.","columns":[],"finalSolution":"Kuhinja"},
-  {"id":10,"title":"Tehnologija","icon":"💻","difficulty":"Srednje","category":"Tehnologija","points":480,"status":"Dostupno","description":"Programiranje, uređaji, inovacija.","columns":[],"finalSolution":"Digitalno"},
-  {"id":11,"title":"Književnost","icon":"📚","difficulty":"Teško","category":"Kultura","points":880,"status":"Zaključano","description":"Pisci, dela i književni pravci.","columns":[],"finalSolution":"Knjige"},
-  {"id":12,"title":"Moda i stil","icon":"👗","difficulty":"Lako","category":"Moda","points":320,"status":"Dostupno","description":"Brendovi, dizajneri, trendovi.","columns":[],"finalSolution":"Stil"}
+  {
+    "id": 1,
+    "title": "Životinje i priroda",
+    "icon": "🦊",
+    "difficulty": "Lako",
+    "category": "Priroda",
+    "points": 300,
+    "status": "Dostupno",
+    "description": "Otvorite polja i pronađite vezu.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Lav", "Tigar", "Leopard", "Jaguar"],
+        "solution": "Mačke"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Hrast", "Jela", "Bor", "Breza"],
+        "solution": "Drveće"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Sava", "Dunav", "Tisa", "Morava"],
+        "solution": "Reke"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Ruža", "Lala", "Iris", "Ljiljan"],
+        "solution": "Cveće"
+      }
+    ],
+    "finalSolution": "Priroda"
+  },
+  {
+    "id": 2,
+    "title": "Sport i kultura",
+    "icon": "⚽",
+    "difficulty": "Lako",
+    "category": "Sport",
+    "points": 350,
+    "status": "Dostupno",
+    "description": "Sportski i kulturni pojmovi povezani kroz zabavu.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Lopta", "Gol", "Stadion", "Sudija"],
+        "solution": "Fudbal"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Reket", "Mreža", "Servis", "Gem"],
+        "solution": "Tenis"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Glumac", "Režija", "Bioskop", "Scenario"],
+        "solution": "Film"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Refren", "Album", "Koncert", "Instrument"],
+        "solution": "Muzika"
+      }
+    ],
+    "finalSolution": "Zabava"
+  },
+  {
+    "id": 3,
+    "title": "Filmovi i serije",
+    "icon": "🎬",
+    "difficulty": "Srednje",
+    "category": "Kultura",
+    "points": 500,
+    "status": "Dostupno",
+    "description": "Klasici svetske kinematografije.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Betmen", "Supermen", "Džoker", "Gotam"],
+        "solution": "DC"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Ajronmen", "Tor", "Halk", "Osvetnici"],
+        "solution": "Marvel"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Frodo", "Prsten", "Gandalf", "Mordor"],
+        "solution": "Gospodar prstenova"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Hari", "Hermiona", "Hogvorts", "Voldemor"],
+        "solution": "Hari Poter"
+      }
+    ],
+    "finalSolution": "Fantastika"
+  },
+  {
+    "id": 4,
+    "title": "Geografija",
+    "icon": "🗺️",
+    "difficulty": "Srednje",
+    "category": "Geografija",
+    "points": 550,
+    "status": "Dostupno",
+    "description": "Gradovi, reke, planine i more.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Pariz", "Rim", "Madrid", "Berlin"],
+        "solution": "Evropa"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Nil", "Amazon", "Dunav", "Misisipi"],
+        "solution": "Reke"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Avala", "Zlatibor", "Tara", "Kopaonik"],
+        "solution": "Planine"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Jadransko", "Crno", "Sredozemno", "Baltičko"],
+        "solution": "Mora"
+      }
+    ],
+    "finalSolution": "Geografija"
+  },
+  {
+    "id": 5,
+    "title": "Muzika sveta",
+    "icon": "🎵",
+    "difficulty": "Srednje",
+    "category": "Muzika",
+    "points": 600,
+    "status": "Dostupno",
+    "description": "Žanrovi, bendovi i instrumenti.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Gitara", "Bas", "Bubnjevi", "Mikrofon"],
+        "solution": "Bend"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Mocart", "Betoven", "Brahms", "Vivaldi"],
+        "solution": "Klasika"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Rep", "Bit", "Rima", "Fristajl"],
+        "solution": "Hip hop"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Saksofon", "Truba", "Kontrabas", "Improvizacija"],
+        "solution": "Džez"
+      }
+    ],
+    "finalSolution": "Muzika"
+  },
+  {
+    "id": 6,
+    "title": "Nauka i otkrića",
+    "icon": "🔬",
+    "difficulty": "Teško",
+    "category": "Nauka",
+    "points": 900,
+    "status": "Dostupno",
+    "description": "Naučnici, elementi, zakoni prirode.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Njutn", "Ajnštajn", "Tesla", "Darvin"],
+        "solution": "Naučnici"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Kiseonik", "Vodonik", "Helijum", "Ugljenik"],
+        "solution": "Elementi"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Gravitacija", "Inercija", "Energija", "Sila"],
+        "solution": "Fizika"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Ćelija", "DNK", "Gen", "Evolucija"],
+        "solution": "Biologija"
+      }
+    ],
+    "finalSolution": "Nauka"
+  },
+  {
+    "id": 7,
+    "title": "Hemija i nauka",
+    "icon": "⚗️",
+    "difficulty": "Teško",
+    "category": "Nauka",
+    "points": 950,
+    "status": "Zaključano",
+    "description": "Periodni sistem i reakcije.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["H", "O", "C", "N"],
+        "solution": "Elementi"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["So", "Voda", "Kiselina", "Baza"],
+        "solution": "Jedinjenja"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Elektron", "Proton", "Neutron", "Jezgro"],
+        "solution": "Atom"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Sagorevanje", "Oksidacija", "Neutralizacija", "Taloženje"],
+        "solution": "Reakcije"
+      }
+    ],
+    "finalSolution": "Hemija"
+  },
+  {
+    "id": 8,
+    "title": "Istorija sveta",
+    "icon": "📜",
+    "difficulty": "Teško",
+    "category": "Istorija",
+    "points": 1000,
+    "status": "Zaključano",
+    "description": "Carevi, ratovi i revolucije.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Rim", "Senat", "Cezar", "Koloseum"],
+        "solution": "Rimsko carstvo"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Bastilja", "Pariz", "Revolucija", "Napoleon"],
+        "solution": "Francuska"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Faraon", "Piramide", "Nil", "Sfinga"],
+        "solution": "Egipat"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Vitez", "Zamak", "Feud", "Krstaši"],
+        "solution": "Srednji vek"
+      }
+    ],
+    "finalSolution": "Istorija"
+  },
+  {
+    "id": 9,
+    "title": "Hrana i kuhinja",
+    "icon": "🍕",
+    "difficulty": "Lako",
+    "category": "Hrana",
+    "points": 280,
+    "status": "Dostupno",
+    "description": "Jela, sastojci i kuhinje sveta.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Testo", "Sir", "Paradajz", "Origano"],
+        "solution": "Pica"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Pirinač", "Alge", "Riba", "Soja sos"],
+        "solution": "Suši"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Tortilja", "Pasulj", "Avokado", "Čili"],
+        "solution": "Meksiko"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Pasta", "Parmezan", "Bazilika", "Maslinovo ulje"],
+        "solution": "Italija"
+      }
+    ],
+    "finalSolution": "Kuhinja"
+  },
+  {
+    "id": 10,
+    "title": "Tehnologija",
+    "icon": "💻",
+    "difficulty": "Srednje",
+    "category": "Tehnologija",
+    "points": 480,
+    "status": "Dostupno",
+    "description": "Programiranje, uređaji, inovacija.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["React", "Angular", "Vue", "Svelte"],
+        "solution": "Framework"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["HTML", "CSS", "JavaScript", "TypeScript"],
+        "solution": "Web"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Telefon", "Laptop", "Tablet", "Monitor"],
+        "solution": "Uređaji"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Git", "Commit", "Branch", "Merge"],
+        "solution": "Verzionisanje"
+      }
+    ],
+    "finalSolution": "Tehnologija"
+  },
+  {
+    "id": 11,
+    "title": "Književnost",
+    "icon": "📚",
+    "difficulty": "Teško",
+    "category": "Kultura",
+    "points": 880,
+    "status": "Zaključano",
+    "description": "Pisci, dela i književni pravci.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Dostojevski", "Tolstoj", "Čehov", "Gogolj"],
+        "solution": "Rusija"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Hamlet", "Otelo", "Magbet", "Romeo"],
+        "solution": "Šekspir"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Roman", "Pesma", "Drama", "Pripovetka"],
+        "solution": "Žanrovi"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Realizam", "Romantizam", "Modernizam", "Barok"],
+        "solution": "Pravci"
+      }
+    ],
+    "finalSolution": "Književnost"
+  },
+  {
+    "id": 12,
+    "title": "Moda i stil",
+    "icon": "👗",
+    "difficulty": "Lako",
+    "category": "Moda",
+    "points": 320,
+    "status": "Dostupno",
+    "description": "Brendovi, dizajneri, trendovi.",
+    "columns": [
+      {
+        "name": "Kolona A",
+        "words": ["Haljina", "Sako", "Kaput", "Košulja"],
+        "solution": "Odeća"
+      },
+      {
+        "name": "Kolona B",
+        "words": ["Sat", "Kaiš", "Torba", "Naočare"],
+        "solution": "Dodaci"
+      },
+      {
+        "name": "Kolona C",
+        "words": ["Crna", "Bela", "Plava", "Crvena"],
+        "solution": "Boje"
+      },
+      {
+        "name": "Kolona D",
+        "words": ["Pariz", "Milano", "Njujork", "London"],
+        "solution": "Moda"
+      }
+    ],
+    "finalSolution": "Stil"
+  }
 ]
