@@ -2,8 +2,27 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../components/Button';
 import { fetchLevels } from '../services/api';
-import type { ILevel } from '../models/Level';
+import { saveGameResult } from '../services/statsStorage';
+import type { AnswerTarget, ILevel } from '../models/Level';
 import { ScoreCalculator } from '../models/ScoreCalculator';
+
+const GAME_DURATION_SECONDS = 300;
+
+const TARGETS: AnswerTarget[] = [
+  'Kolona A',
+  'Kolona B',
+  'Kolona C',
+  'Kolona D',
+  'Konačno',
+];
+
+function normalizeAnswer(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
 
 export default function GamePage() {
   const { id } = useParams();
@@ -11,85 +30,212 @@ export default function GamePage() {
 
   const [level, setLevel] = useState<ILevel | null>(null);
   const [opened, setOpened] = useState<number[]>([]);
-  const [time, setTime] = useState(180);
+  const [time, setTime] = useState(GAME_DURATION_SECONDS);
   const [answer, setAnswer] = useState('');
   const [message, setMessage] = useState('');
+  const [attemptsLeft, setAttemptsLeft] = useState(5);
+  const [selectedTarget, setSelectedTarget] = useState<AnswerTarget>('Konačno');
+  const [solvedColumns, setSolvedColumns] = useState<number[]>([]);
+  const [isFinalSolved, setIsFinalSolved] = useState(false);
+  const [gameFinished, setGameFinished] = useState(false);
+
+  const calc = useMemo(() => new ScoreCalculator(), []);
+
+  const currentLevel = level;
+  const columns = currentLevel?.columns ?? [];
+  const allWords = columns.flatMap((column) => column.words);
+
+  function calculateCurrentPoints(
+    finalSolved = isFinalSolved,
+    solvedColumnCount = solvedColumns.length,
+  ): number {
+    if (!currentLevel) {
+      return 0;
+    }
+
+    return calc.calculateScore(
+      currentLevel.points,
+      opened.length,
+      time,
+      solvedColumnCount,
+      finalSolved,
+    );
+  }
+
+  const points = calculateCurrentPoints();
 
   useEffect(() => {
     fetchLevels().then((levels) => {
       const selectedLevel = levels.find((x) => x.id === Number(id)) || levels[0];
+
       setLevel(selectedLevel);
+      setOpened([]);
+      setTime(GAME_DURATION_SECONDS);
+      setAnswer('');
+      setMessage('');
+      setAttemptsLeft(5);
+      setSelectedTarget('Konačno');
+      setSolvedColumns([]);
+      setIsFinalSolved(false);
+      setGameFinished(false);
     });
   }, [id]);
 
   useEffect(() => {
+    if (!currentLevel || gameFinished) {
+      return;
+    }
+
+    if (time <= 0) {
+      finishGame(false);
+      return;
+    }
+
     const timer = setInterval(() => {
       setTime((value) => Math.max(0, value - 1));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [currentLevel, gameFinished, time]);
 
-  const calc = useMemo(() => new ScoreCalculator(), []);
+  function finishGame(
+    isWin: boolean,
+    finalSolved = isFinalSolved,
+    solvedColumnCount = solvedColumns.length,
+  ) {
+    if (!currentLevel || gameFinished) {
+      return;
+    }
 
-  if (!level) {
-    return <main className="page">Učitavanje...</main>;
+    const finalScore = isWin
+      ? calculateCurrentPoints(finalSolved, solvedColumnCount)
+      : 0;
+
+    saveGameResult({
+      levelId: currentLevel.id,
+      levelTitle: currentLevel.title,
+      isWin,
+      score: finalScore,
+      timeSpentSeconds: GAME_DURATION_SECONDS - time,
+      remainingSeconds: time,
+      openedFields: opened.length,
+    });
+
+    setGameFinished(true);
+
+    if (isWin) {
+      setIsFinalSolved(true);
+      setMessage(`Bravo! Pogodili ste konačno rešenje i osvojili ${finalScore} poena.`);
+    } else {
+      setMessage('Igra je završena. Rezultat je sačuvan kao poraz.');
+    }
   }
 
-  const currentLevel = level;
+  function openCell(index: number) {
+    if (gameFinished) {
+      return;
+    }
 
-  const columns =
-    currentLevel.columns.length > 0
-      ? currentLevel.columns
-      : [
-          {
-            name: 'Kolona A',
-            words: ['Lav', 'Tigar', 'Leopard', 'Jaguar'],
-            solution: 'Mačke',
-          },
-          {
-            name: 'Kolona B',
-            words: ['Hrast', 'Jela', 'Bor', 'Breza'],
-            solution: 'Drveće',
-          },
-          {
-            name: 'Kolona C',
-            words: ['Sava', 'Dunav', 'Tisa', 'Morava'],
-            solution: 'Reke',
-          },
-          {
-            name: 'Kolona D',
-            words: ['Ruža', 'Lala', 'Iris', 'Ljiljan'],
-            solution: 'Cveće',
-          },
-        ];
-
-  const allWords = columns.flatMap((column) => column.words);
-
-  const points = calc.calculateScore(currentLevel.points, opened.length, time);
+    setOpened((previousOpened) =>
+      previousOpened.includes(index)
+        ? previousOpened
+        : [...previousOpened, index],
+    );
+  }
 
   function openField() {
-    const next = allWords.findIndex((_, index) => !opened.includes(index));
-
-    if (next >= 0) {
-      setOpened([...opened, next]);
+    if (gameFinished) {
+      return;
     }
+
+    setOpened((previousOpened) => {
+      const next = allWords.findIndex((_, index) => !previousOpened.includes(index));
+
+      if (next < 0) {
+        return previousOpened;
+      }
+
+      return [...previousOpened, next];
+    });
+  }
+
+  function handleWrongAnswer() {
+    const nextAttempts = attemptsLeft - 1;
+
+    setAttemptsLeft(nextAttempts);
+    setAnswer('');
+
+    if (nextAttempts <= 0) {
+      finishGame(false);
+      return;
+    }
+
+    setMessage(`Nije tačno. Preostalo pokušaja: ${nextAttempts}.`);
   }
 
   function check() {
-    const possibleAnswers = [
-      ...columns.map((column) => column.solution.toLowerCase()),
-      currentLevel.finalSolution.toLowerCase(),
-    ];
-
-    const isCorrect = possibleAnswers.includes(answer.toLowerCase().trim());
-
-    if (isCorrect) {
-      setMessage('Tačan odgovor! Demo rezultat je sačuvan.');
-      localStorage.setItem('lastScore', String(points));
-    } else {
-      setMessage('Nije tačno, pokušajte ponovo.');
+    if (!currentLevel || gameFinished) {
+      return;
     }
+
+    const normalizedUserAnswer = normalizeAnswer(answer);
+
+    if (!normalizedUserAnswer) {
+      setMessage('Unesite odgovor pre provere.');
+      return;
+    }
+
+    if (selectedTarget === 'Konačno') {
+      const normalizedFinalSolution = normalizeAnswer(currentLevel.finalSolution);
+
+      if (normalizedUserAnswer === normalizedFinalSolution) {
+        finishGame(true, true, solvedColumns.length);
+        setAnswer('');
+        return;
+      }
+
+      handleWrongAnswer();
+      return;
+    }
+
+    const columnIndex = TARGETS.indexOf(selectedTarget);
+    const selectedColumn = columns[columnIndex];
+
+    if (!selectedColumn) {
+      setMessage('Izabrana kolona ne postoji za ovaj nivo.');
+      return;
+    }
+
+    if (solvedColumns.includes(columnIndex)) {
+      setMessage('Ova kolona je već rešena.');
+      setAnswer('');
+      return;
+    }
+
+    const normalizedColumnSolution = normalizeAnswer(selectedColumn.solution);
+
+    if (normalizedUserAnswer === normalizedColumnSolution) {
+      const nextSolvedColumns = [...solvedColumns, columnIndex];
+
+      setSolvedColumns(nextSolvedColumns);
+      setMessage(`Tačno! Rešenje za ${selectedTarget} je: ${selectedColumn.solution}.`);
+      setAnswer('');
+      return;
+    }
+
+    handleWrongAnswer();
+  }
+
+  function quitGame() {
+    if (!gameFinished) {
+      finishGame(false);
+    }
+
+    nav('/levels');
+  }
+
+  if (!currentLevel) {
+    return <main className="page">Učitavanje...</main>;
   }
 
   return (
@@ -97,7 +243,7 @@ export default function GamePage() {
       <div className="game-head">
         <div>
           <h1>🎯 Nivo: {currentLevel.title}</h1>
-          <p>Otvorite polja i pogodite asocijacije.</p>
+          <p>Otvorite polja, rešite kolone i pogodite konačno rešenje.</p>
         </div>
 
         <div className="game-stats">
@@ -115,6 +261,7 @@ export default function GamePage() {
               .padStart(2, '0')}
             :{(time % 60).toString().padStart(2, '0')}
           </b>
+
           <b>
             Polja
             <br />
@@ -123,10 +270,11 @@ export default function GamePage() {
 
           <b>
             Pokušaji
-            <br />5
+            <br />
+            {attemptsLeft}
           </b>
 
-          <Button variant="danger" onClick={() => nav('/levels')}>
+          <Button variant="danger" onClick={quitGame}>
             Odustani
           </Button>
         </div>
@@ -142,12 +290,9 @@ export default function GamePage() {
 
               return (
                 <button
-                  className="cell"
-                  onClick={() => {
-                    if (!opened.includes(index)) {
-                      setOpened([...opened, index]);
-                    }
-                  }}
+                  className={`cell ${opened.includes(index) ? 'opened' : ''}`}
+                  onClick={() => openCell(index)}
+                  disabled={gameFinished || opened.includes(index)}
                   key={word}
                 >
                   {opened.includes(index) ? word : '?'}
@@ -159,18 +304,44 @@ export default function GamePage() {
       </div>
 
       <div className="solutions">
-        {columns.map((column) => (
-          <span key={column.name}>???</span>
+        {columns.map((column, index) => (
+          <span
+            className={solvedColumns.includes(index) ? 'solved' : ''}
+            key={column.name}
+          >
+            {solvedColumns.includes(index) ? column.solution : '???'}
+          </span>
         ))}
+
+        <span className={isFinalSolved ? 'solved final' : 'final'}>
+          {isFinalSolved ? currentLevel.finalSolution : 'Konačno: ???'}
+        </span>
       </div>
 
       <section className="answer">
-        <h3>🏁 Konačno rešenje asocijacije</h3>
+        <h3>🎯 Izabrano za proveru: {selectedTarget}</h3>
+
+        <div className="target-select">
+          {TARGETS.map((target) => (
+            <button
+              type="button"
+              className={`target-option ${
+                selectedTarget === target ? 'active' : ''
+              }`}
+              onClick={() => setSelectedTarget(target)}
+              disabled={gameFinished}
+              key={target}
+            >
+              {target}
+            </button>
+          ))}
+        </div>
 
         <input
           value={answer}
           onChange={(event) => setAnswer(event.target.value)}
           placeholder="Upišite odgovor ovde..."
+          disabled={gameFinished}
         />
 
         <Button onClick={check}>✓ Proveri</Button>
@@ -179,9 +350,15 @@ export default function GamePage() {
           🔓 Otvori polje (-50 pts)
         </Button>
 
-        <Button variant="ghost" onClick={() => nav('/levels')}>
+        <Button variant="ghost" onClick={quitGame}>
           ← Nazad na nivoe
         </Button>
+
+        {gameFinished && (
+          <Button variant="ghost" onClick={() => nav('/profile')}>
+            Pogledaj statistiku
+          </Button>
+        )}
 
         {message && <p>{message}</p>}
       </section>

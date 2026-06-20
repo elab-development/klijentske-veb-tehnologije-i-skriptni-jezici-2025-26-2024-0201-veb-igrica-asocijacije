@@ -3,24 +3,27 @@ export interface IColumn {
   words: string[];
   solution: string;
 }
+
+export type Difficulty = 'Lako' | 'Srednje' | 'Teško';
+
+export type LevelStatus = 'Završeno' | 'Dostupno' | 'Zaključano';
+
+export type AnswerTarget =
+  | 'Kolona A'
+  | 'Kolona B'
+  | 'Kolona C'
+  | 'Kolona D'
+  | 'Konačno';
+
 export interface ILevel {
   id: number;
   title: string;
   icon: string;
-  difficulty: 'Lako' | 'Srednje' | 'Teško';
+  difficulty: Difficulty;
   category: string;
   points: number;
-  status: 'Završeno' | 'Dostupno' | 'Zaključano';
+  status: LevelStatus;
   description: string;
   columns: IColumn[];
   finalSolution: string;
-}
-export class ScoreCalculator {
-  calculateScore(
-    basePoints: number,
-    openedFields: number,
-    remainingSeconds: number,
-  ): number {
-    return Math.max(0, basePoints + remainingSeconds * 2 - openedFields * 50);
-  }
 }
