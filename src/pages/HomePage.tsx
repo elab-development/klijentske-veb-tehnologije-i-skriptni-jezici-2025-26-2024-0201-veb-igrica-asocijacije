@@ -1,9 +1,30 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import StatCard from '../components/StatCard';
+import { fetchAdviceSuggestion, type IAdviceSuggestion } from '../services/api';
 
 export default function HomePage() {
   const nav = useNavigate();
+
+const [adviceSuggestion, setAdviceSuggestion] = useState<IAdviceSuggestion | null>(
+  null,
+);
+
+const [isLoadingAdvice, setIsLoadingAdvice] = useState(false);
+
+async function loadAdviceSuggestion() {
+  setIsLoadingAdvice(true);
+
+  const suggestion = await fetchAdviceSuggestion();
+
+  setAdviceSuggestion(suggestion);
+  setIsLoadingAdvice(false);
+}
+
+useEffect(() => {
+  loadAdviceSuggestion();
+}, []);
 
   const features = [
     {
@@ -51,12 +72,13 @@ export default function HomePage() {
         </h1>
 
         <p>
-          Otvorite polja, pronađite skrivene veze između reči i pogodite konačno rešenje.
-          Takmičite se sa igračima iz celog sveta.
+          Otvorite polja, pronađite skrivene veze između reči i pogodite konačno
+          rešenje. Takmičite se sa igračima iz celog sveta.
         </p>
 
         <div className="actions">
           <Button onClick={() => nav('/levels')}>🎮 Započni igru</Button>
+
           <Button variant="ghost" onClick={() => nav('/levels')}>
             📋 Pogledaj nivoe
           </Button>
@@ -69,6 +91,32 @@ export default function HomePage() {
         <StatCard label="Zadovoljnih igrača" value="98%" caption="" />
         <StatCard label="Prosečno vreme" value="3 min" caption="" />
       </section>
+
+      <section className="api-card">
+  <span className="badge">Eksterni API</span>
+
+  <h2>💡 Savet za fokus pre igre</h2>
+
+  {adviceSuggestion ? (
+    <>
+      <p>{adviceSuggestion.advice}</p>
+
+      <small>Izvor: Advice Slip API · ID saveta: {adviceSuggestion.id}</small>
+
+      <div className="actions">
+        <Button
+          variant="ghost"
+          onClick={loadAdviceSuggestion}
+          disabled={isLoadingAdvice}
+        >
+          {isLoadingAdvice ? 'Učitavanje...' : 'Učitaj novi savet'}
+        </Button>
+      </div>
+    </>
+  ) : (
+    <p>Učitavanje saveta...</p>
+  )}
+</section>
 
       <section className="how-section">
         <h2>Kako funkcioniše?</h2>
@@ -87,13 +135,15 @@ export default function HomePage() {
 
       <section className="cta home-cta">
         <h2>Spreman si za izazov?</h2>
+
         <p>
-          Registrujte se i dobićete pristup svim nivoima, rang listi i naprednom praćenju
-          statistika.
+          Registrujte se i dobićete pristup svim nivoima, rang listi i
+          naprednom praćenju statistika.
         </p>
 
         <div className="actions">
           <Button onClick={() => nav('/register')}>Registruj se besplatno</Button>
+
           <Button variant="ghost" onClick={() => nav('/levels')}>
             Isprobaj bez naloga
           </Button>

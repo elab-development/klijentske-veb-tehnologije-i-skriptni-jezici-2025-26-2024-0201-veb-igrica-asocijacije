@@ -995,3 +995,39 @@ th {
 .section-title-row h2 {
   margin: 0;
 }
+/* API CARDS */
+
+.api-card {
+  max-width: 850px;
+  margin: 24px auto 44px;
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.22);
+}
+
+.api-card h2 {
+  margin: 16px 0 10px;
+  font-size: 26px;
+}
+
+.api-card p {
+  max-width: 680px;
+  margin: 0 auto 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.api-card small {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.api-answer {
+  display: block;
+  margin: 16px auto 0;
+  color: var(--cyan);
+}
