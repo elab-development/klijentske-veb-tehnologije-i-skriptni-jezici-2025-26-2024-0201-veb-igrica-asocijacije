@@ -1031,3 +1031,261 @@ th {
   margin: 16px auto 0;
   color: var(--cyan);
 }
+/* FINAL MOBILE OPTIMIZATION */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 800px) {
+  .page {
+    max-width: 100%;
+    padding: 28px 14px;
+  }
+
+  .nav {
+    height: auto;
+    min-height: 56px;
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .nav nav {
+    width: 100%;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .nav a {
+    white-space: nowrap;
+    font-size: 11px;
+  }
+
+  h1,
+  .home-hero h1,
+  .game-head h1,
+  .profile-head h1 {
+    font-size: 30px;
+    line-height: 1.15;
+  }
+
+  .home-hero {
+    padding-top: 18px;
+  }
+
+  .home-hero p,
+  .cta p,
+  .feature p,
+  .level-card p {
+    font-size: 13px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions .btn,
+  .btn {
+    width: 100%;
+  }
+
+  .stats,
+  .features,
+  .level-grid,
+  .wide {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    min-height: auto;
+  }
+
+  .cta,
+  .api-card {
+    padding: 22px 16px;
+  }
+
+  .auth-page {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .auth-panel {
+    min-height: calc(100vh - 80px);
+    padding: 34px 18px;
+    border-right: none;
+  }
+
+  .auth-panel > *,
+  .register-page .auth-panel > * {
+    max-width: 100%;
+  }
+
+  .auth-promo {
+    display: none;
+  }
+
+  .two {
+    grid-template-columns: 1fr;
+  }
+
+  .game-head {
+    flex-direction: column;
+  }
+
+  .game-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .game-stats b {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .game-stats .btn {
+    grid-column: 1 / -1;
+  }
+
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .cell {
+    height: 72px;
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .solutions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .solutions span.final {
+    grid-column: 1 / -1;
+  }
+
+  .answer {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .target-select {
+    justify-content: center;
+  }
+
+  .target-option {
+    flex: 1 1 130px;
+    font-size: 12px;
+  }
+
+  .profile-head {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+  }
+
+  .section-title-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .xp strong {
+    float: none;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .podium {
+    gap: 8px;
+  }
+
+  .podium div {
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .podium .winner {
+    padding: 26px 18px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 22px 12px;
+  }
+
+  h1,
+  .home-hero h1,
+  .game-head h1 {
+    font-size: 26px;
+  }
+
+  .home-hero .badge,
+  .badge,
+  .tag {
+    font-size: 11px;
+  }
+
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .solutions {
+    grid-template-columns: 1fr;
+  }
+
+  .cell {
+    height: 58px;
+  }
+
+  .game-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .level-card,
+  .feature,
+  .stat-card,
+  .activity,
+  .xp {
+    padding: 16px;
+  }
+
+  .card-bottom {
+    flex-wrap: wrap;
+  }
+
+  .card-bottom .btn {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
